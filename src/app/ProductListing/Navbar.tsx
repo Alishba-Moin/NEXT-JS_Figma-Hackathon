@@ -1,69 +1,57 @@
-import Link from 'next/link';
-import { CgProfile } from 'react-icons/cg';
-import { IoSearch } from 'react-icons/io5';
-import { MdOutlineShoppingCart } from 'react-icons/md';
+import Link from "next/link";
+import { CgProfile } from "react-icons/cg";
+import { IoSearch } from "react-icons/io5";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { Button } from "@/components/ui/button"; // ShadCN Button
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"; // ShadCN Sheet
 
 export default function Navbar() {
   return (
-    <nav className="w-full h-[80px] bg-white relative">
-      {/* Avion Brand Name */}
-      <div className="absolute top-[25px] left-4 sm:left-[80px] text-[#22202E] text-[24px] font-[400] font-clash-display">
-        <Link href="/">Avion</Link>
-      </div>
-
-      {/* Main Links - Desktop View */}
-      <div className="hidden lg:flex absolute top-[29px] left-[297px] gap-[44px] text-[#726E8D] text-[16px] font-[400]">
-        <Link href="/plant-pots">Plant pots</Link>
-        <Link href="/ceramics">Ceramics</Link>
-        <Link href="/tables">Tables</Link>
-        <Link href="/chairs">Chairs</Link>
-        <Link href="/crockery">Crockery</Link>
-        <Link href="/tableware">Tableware</Link>
-        <Link href="/cutlery">Cutlery</Link>
-      </div>
-
-      {/* Side Actions (Icons for Search, Cart, Avatar) - Desktop View */}
-      <div className="hidden lg:flex absolute top-[30px] right-10 gap-[16px]">
-        {/* Search Icon */}
-        <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full">
-          <IoSearch size={16} color="#2A254B" />
+    <nav className="w-full h-[80px] bg-white border-b border-gray-200">
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-8 lg:px-16">
+        {/* Brand Name */}
+        <div className="text-xl font-semibold text-gray-900">
+          <Link href="/">Avion</Link>
         </div>
 
-        {/* Shopping Cart Icon */}
-        <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full">
-          <MdOutlineShoppingCart size={16} color="#2A254B" />
+        {/* Desktop Links */}
+        <div className="hidden lg:flex gap-6 text-gray-600">
+          <Link href="/plant-pots">Plant pots</Link>
+          <Link href="/ceramics">Ceramics</Link>
+          <Link href="/tables">Tables</Link>
+          <Link href="/chairs">Chairs</Link>
+          <Link href="/crockery">Crockery</Link>
+          <Link href="/tableware">Tableware</Link>
+          <Link href="/cutlery">Cutlery</Link>
         </div>
 
-        {/* User Avatar Icon */}
-        <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full">
-          <CgProfile size={16} color="#2A254B" />
+        {/* Actions (Search, Cart, Profile) */}
+        <div className="hidden lg:flex gap-6 items-center">
+          <IoSearch className="text-gray-700" size={20} />
+          <MdOutlineShoppingCart className="text-gray-700" size={20} />
+          <CgProfile className="text-gray-700" size={20} />
         </div>
-      </div>
 
-      {/* Mobile Layout (Hamburger Menu & Icons) */}
-      <div className="lg:hidden absolute top-2 right-4 flex items-center gap-4">
-        {/* Mobile Icons */}
-        <IoSearch size={20} color="#2A254B" />
-        <MdOutlineShoppingCart size={20} color="#2A254B" />
-        <CgProfile size={20} color="#2A254B" />
-      </div>
+        {/* Mobile Menu Trigger - Checkbox & Label */}
+        <input type="checkbox" id="menu-toggle" className="peer hidden" />
+        <label htmlFor="menu-toggle" className="lg:hidden text-gray-700 text-2xl px-2 py-1 cursor-pointer">
+          ☰
+        </label>
 
-      {/* Hamburger Menu - Mobile View */}
-      <div className="lg:hidden absolute top-[29px] left-4 flex items-center gap-4">
-        <button className="text-[#2A254B] text-2xl">☰</button> {/* Replace with hamburger icon */}
-      </div>
-
-      {/* Mobile Menu - When Hamburger is Clicked (Toggleable) */}
-      {/* Example: Mobile Menu dropdown could go here */}
-      <div className="lg:hidden absolute top-[80px] left-4 w-full bg-white shadow-lg flex flex-col items-start p-4">
-        <Link href="/plant-pots">Plant pots</Link>
-        <Link href="/ceramics">Ceramics</Link>
-        <Link href="/tables">Tables</Link>
-        <Link href="/chairs">Chairs</Link>
-        <Link href="/crockery">Crockery</Link>
-        <Link href="/tableware">Tableware</Link>
-        <Link href="/cutlery">Cutlery</Link>
+        {/* Mobile Menu (Hidden by default, visible when checkbox is checked) */}
+        <div className="peer-checked:block hidden absolute top-[80px] left-0 w-full bg-white shadow-lg p-4">
+          <nav className="flex flex-col gap-4">
+            <Link href="/plant-pots">Plant pots</Link>
+            <Link href="/ceramics">Ceramics</Link>
+            <Link href="/tables">Tables</Link>
+            <Link href="/chairs">Chairs</Link>
+            <Link href="/crockery">Crockery</Link>
+            <Link href="/tableware">Tableware</Link>
+            <Link href="/cutlery">Cutlery</Link>
+          </nav>
+        </div>
       </div>
     </nav>
   );
 }
+
