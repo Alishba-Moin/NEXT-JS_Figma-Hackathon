@@ -1,7 +1,6 @@
 import Header from "@/components/Header/page";
-import { Button } from "@/components/ui/button";
 import React from "react";
-import { FaCaretDown } from "react-icons/fa"; // Import React Icons
+import { FaCaretDown } from "react-icons/fa";
 
 const Navbar = () => {
   return (
