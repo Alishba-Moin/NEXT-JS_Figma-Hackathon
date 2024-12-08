@@ -20,7 +20,7 @@ export default function About() {
         </div>
 
         {/* Button - Right side */}
-        <Link href="/products" passHref>
+        <Link href="/AllProducts" passHref>
           <Button className="text-gray-950 px-[32px] py-[16px] rounded-md text-[16px] leading-[24px] sm:px-[24px] sm:py-[12px] sm:w-full">
             View Our Products
           </Button>
@@ -29,12 +29,12 @@ export default function About() {
 
      {/* Story Section */}
      <div className="flex flex-col md:flex-row w-full h-auto items-center justify-around px-4 py-16">
-        <div className="bg-custom-purple w-full md:w-2/5 text-white p-8 md:p-16 mb-8 md:mb-0">
-          <h1 className="text-xl md:text-2xl">It started with a small idea</h1>
-          <p className="mt-6">
+        <div className="bg-[#2A254B] w-full md:w-2/5 text-white p-8 md:p-16 mb-8 md:mb-0">
+          <h1 className="text-xl md:text-2xl text-white ">It started with a small idea</h1>
+          <p className="mt-6 text-white">
             A global brand with local beginnings, our story began in a small studio in South London in early 2014.
           </p>
-          <Button className="bg-input-bg h-12 w-40 rounded-sm mt-10 text-white">
+          <Button className="text-[#2A254B] bg-white h-12 w-40">
             View Collection
           </Button>
         </div>
@@ -54,7 +54,7 @@ export default function About() {
           alt="Service"
           className="w-full md:w-2/5 transition-transform duration-300 ease-in-out hover:scale-105 hover:translate-y-1"
         />
-        <div className="border-2 bg-slate-200 w-full md:w-3/5 p-8 md:p-20">
+        <div className="border-2 w-full md:w-3/5 p-8 md:p-20 bg-[#F9F9F9]">
           <h1 className="text-xl md:text-2xl text-custom-purple">
             Our service isn&lsquo;t just personal, it&lsquo;s actually hyper-personally exquisite
           </h1>
@@ -63,7 +63,7 @@ export default function About() {
             mass market. Handmade, and lovingly crafted furniture and homeware is what we live, breathe, and design so
             our Chelsea boutique became the hotbed for the London interior design community.
           </p>
-          <Button className="bg-white h-12 w-40 rounded-sm mt-10 text-custom-purple">Get in Touch</Button>
+          <Button className="h-12 w-40 mt-10">Get in Touch</Button>
         </div>
       </div>
 
