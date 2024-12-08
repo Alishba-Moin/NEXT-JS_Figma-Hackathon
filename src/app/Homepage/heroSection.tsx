@@ -1,44 +1,45 @@
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import React from 'react';
 
-const HeroSection = () => {
+const Hero = () => {
   return (
-    <section className="bg-white">
-      <div className="relative w-full max-w-screen-xl mx-auto h-auto md:h-[800px] px-8 py-12">
-        {/* Container */}
-        <div className="flex flex-col-reverse lg:flex-row justify-between items-center w-full h-full bg-[#2A254B]">
-          {/* Left Content */}
-          <div className="w-full lg:w-[55%] h-auto md:h-[700px] px-4 md:px-12 py-6 md:py-12 text-white flex flex-col justify-between">
-            {/* Heading */}
-            <h2 className="text-[32px] md:text-[40px] font-normal leading-[140%] text-white">
-              The furniture brand for the future, with timeless designs
-            </h2>
+    <>
+      <section>
+        <div className="px-8 py-12">
+          <div className="flex flex-col md:flex-row">
+            {/* Left Content with Purple Background and Text */}
+            <div className="relative w-full md:w-[60%] h-auto md:h-[580px] border border-black bg-[#2A254B] text-white px-4 md:px-12 py-6 md:py-12 flex flex-col justify-between">
+              <div>
+                <h1 className="text-xl md:text-3xl md:text-left">
+                  The furniture brand for the future with <br /> the timeless designs
+                </h1>
+                <div className="flex justify-center md:justify-start">
+                  <button className="w-[170px] h-[56px] bg-transparent text-white border border-gray-600 font-bold mt-12">
+                    View collection
+                  </button>
+                </div>
+              </div>
 
-            <Button className="w-[180px] h-[60px] bg-transparent text-white border border-gray-600 font-bold mt-8">
-              View collection
-            </Button>
+              <div className="my-4 md:my-0">
+                <p className="text-sm md:text-base md:text-left">
+                  A new era in eco-friendly furniture with Avion, the French luxury retail brand
+                  <br /> with sleek fonts, full colors, and a beautiful way to display things digitally
+                  <br /> using modern web technologies.
+                </p>
+              </div>
 
-            <div className="flex justify-center md:justify-start">
-              <p className="mt-6 text-sm md:text-base">
-                A new era in eco-friendly furniture with Avion, the French luxury retail brand
-                <br /> with sleek fonts, full colors, and a beautiful way to display things digitally
-                <br /> using modern web technologies.
-              </p>
+              {/* Right Image as background */}
+              <div
+                className="absolute top-0 right-0 w-[40%] h-full bg-cover bg-center"
+                style={{ backgroundImage: "url('Right-Image.png')" }}
+              />
             </div>
           </div>
-
-          {/* Right Image */}
-          <div
-            className="absolute top-0 left-[760px] w-[600px] h-[700px] bg-cover bg-center"
-            style={{ backgroundImage: 'url(/Right-Image.png)' }}
-          >
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
-export default HeroSection;
+export default Hero;
+
 
