@@ -30,9 +30,9 @@ export default function ShoppingBasket() {
 
                     {/* Quantity Stepper */}
                     <div className="flex items-center justify-center space-x-4">
-                        <Button className="w-8 h-8  text-gray-700 flex items-center justify-center">-</Button>
+                        <Button className="w-8 h-8 text-gray-700 flex items-center justify-center">-</Button>
                         <span className="text-lg font-medium">1</span>
-                        <Button className="w-8 h-8 bg-gray-200 text-gray-700 flex items-center justify-center">+</Button>
+                        <Button className="w-8 h-8 bg-gray-700 text-gray-700 flex items-center justify-center">+</Button>
                     </div>
 
                     {/* Total Price */}
@@ -67,12 +67,12 @@ export default function ShoppingBasket() {
                     <span className="text-lg font-medium text-gray-900">Subtotal</span>
                     <span className="text-lg font-medium text-gray-900">£210</span>
                 </div>
-                <div className="flex justify-center items-center mt-2">
+                <div className="flex justify-end items-center mt-2">
                     <span className="text-sm text-gray-600">Taxes and shipping are calculated at checkout</span>
                 </div>
 
                 {/* Checkout Button */}
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-end items-center mt-8">
                     <Button className="bg-gray-950 text-white px-6 py-3 rounded-md hover:bg-gray-800">Go to checkout</Button>
                 </div>
             </div>
