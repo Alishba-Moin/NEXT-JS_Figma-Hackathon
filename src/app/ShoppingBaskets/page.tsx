@@ -20,7 +20,7 @@ export default function ShoppingBasket() {
                 <div className="grid grid-cols-3 gap-4 items-center border-b border-gray-200 py-6">
                     {/* Product Image and Details */}
                     <div className="flex items-start space-x-4">
-                        <div className="w-[120px] h-[120px] bg-cover bg-center" style={{ backgroundImage: "url('/product1.png')" }}></div>
+                        <div className="w-[120px] h-[120px] bg-cover bg-center" style={{ backgroundImage: "url('/Product1.png')" }}></div>
                         <div className="flex flex-col">
                             <span className="text-lg font-medium text-gray-900">Graystone vase</span>
                             <span className="text-sm text-gray-500">A timeless ceramic vase with a tri color grey glaze.</span>
@@ -32,7 +32,7 @@ export default function ShoppingBasket() {
                     <div className="flex items-center justify-center space-x-4">
                         <Button className="w-8 h-8 text-gray-700 flex items-center justify-center">-</Button>
                         <span className="text-lg font-medium">1</span>
-                        <Button className="w-8 h-8 bg-gray-700 text-gray-700 flex items-center justify-center">+</Button>
+                        <Button className="w-8 h-8 text-gray-700 flex items-center justify-center">+</Button>
                     </div>
 
                     {/* Total Price */}
@@ -43,7 +43,7 @@ export default function ShoppingBasket() {
                 <div className="grid grid-cols-3 gap-4 items-center border-b border-gray-200 py-6">
                     {/* Product Image and Details */}
                     <div className="flex items-start space-x-4">
-                        <div className="w-[120px] h-[120px] bg-cover bg-center" style={{ backgroundImage: "url('/product2.png')" }}></div>
+                        <div className="w-[120px] h-[120px] bg-cover bg-center" style={{ backgroundImage: "url('/Product2.png')" }}></div>
                         <div className="flex flex-col">
                             <span className="text-lg font-medium text-gray-900">Basic white vase</span>
                             <span className="text-sm text-gray-500">Beautiful and simple this is one for the classics.</span>
