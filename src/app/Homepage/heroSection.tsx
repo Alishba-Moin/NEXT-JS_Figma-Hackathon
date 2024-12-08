@@ -5,7 +5,7 @@ export default function HeroSection() {
       {/* Container */}
       <div className="flex flex-col lg:flex-row justify-between items-center w-full h-full bg-[#2A254B] p-8">
         {/* Left Content */}
-        <div className="max-w-[513px] space-y-8">
+        <div className="max-w-[500px] space-y-8">
           {/* Heading */}
           <h2 className="text-[32px] font-normal leading-[140%] text-white font-clash-display sm:text-[28px] md:text-[32px]">
             The furniture brand for the future, with timeless designs
@@ -26,10 +26,11 @@ export default function HeroSection() {
         </div>
 
         {/* Right Image */}
-        <div
-          className="w-[520px] h-full bg-cover bg-center lg:w-[520px] sm:w-full sm:h-[300px] md:h-[400px]"
-          style={{ backgroundImage: "url('/Right-Image.png')" }}
-        ></div>
+      <div
+  className="w-[520px] h-full bg-cover bg-center lg:w-[520px] sm:w-full sm:h-[400px] md:h-[600px] lg:h-[800px]"
+  style={{ backgroundImage: "url('/Right-Image.png')" }}
+></div>
+
       </div>
     </div>
   );
