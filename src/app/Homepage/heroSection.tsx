@@ -33,7 +33,7 @@ const HeroSection = () => {
             <Image
               src={'/Right-Image.png'}
               width={500}
-              height={500}
+              height={400}
               alt="rightimage"
               className="object-cover"
             />
