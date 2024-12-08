@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import ProductCard from './productCard';
 import Navbar from './header';
-
+import Link from 'next/link'
 const products = [
   { title: 'Product 1', price: '£250', imageUrl: '/img1.png' },
   { title: 'Product 2', price: '£180', imageUrl: '/img2.png' },
