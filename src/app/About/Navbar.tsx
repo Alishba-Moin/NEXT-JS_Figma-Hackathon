@@ -18,7 +18,7 @@ export default function Navbar() {
         </div>
 
         {/* Right Side Links for desktop */}
-        <div className="hidden ml-auto lg:flex gap-8">
+        <div className="hidden ml-auto lg:flex gap-4">
           <Link href="/About" className="text-[#726E8D] text-sm">About Us</Link>
           <Link href="/contact" className="text-[#726E8D] text-sm">Contact</Link>
           <Link href="/blog" className="text-[#726E8D] text-sm">Blog</Link>
