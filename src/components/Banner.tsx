@@ -24,7 +24,7 @@ export default function Banner() {
         {/* Banner Content */}
         <div className="absolute flex items-center gap-2 w-full max-w-[407px] px-4 sm:w-auto sm:px-0 left-1/2 transform -translate-x-1/2 top-3">
           {/* Delivery Icon */}
-          <FaTruck size={16} color="white" className="inline-block" />
+          <FaTruck size={30} color="white" className="inline-block" />
           
           {/* Delivery Text */}
           <p className="text-white text-xs sm:text-sm md:text-base">
@@ -33,7 +33,7 @@ export default function Banner() {
         </div>
 
         {/* Close Button */}
-        <button className="absolute top-2 right-4 text-white text-lg sm:text-xl md:text-2xl">
+        <button className="absolute top-2 right-4 text-white text-md sm:text-xl md:text-2xl">
           X
         </button>
       </div>
