@@ -9,7 +9,7 @@ const HeroSection = () => {
         {/* Container */}
         <div className="flex flex-col-reverse lg:flex-row justify-between items-center w-full h-full bg-[#2A254B]">
           {/* Left Content */}
-          <div className="w-full lg:w-[55%] h-auto md:h-[700px] px-4 md:px-12 py-6 md:py-12 text-white flex flex-col justify-between">
+          <div className="w-full lg:w-[44%] h-auto md:h-[700px] px-4 md:px-12 py-6 md:py-12 text-white flex flex-col justify-between">
             {/* Heading */}
             <h2 className="text-[32px] md:text-[40px] font-normal leading-[140%] text-white">
               The furniture brand for the future, with timeless designs
@@ -30,7 +30,7 @@ const HeroSection = () => {
 
           {/* Right Image */}
           <div
-            className="absolute top-0 left-[760px] w-[600px] h-[700px] bg-cover bg-center"
+            className="absolute top-0 left-[760px] w-[400px] h-[500px] bg-cover bg-center"
             style={{ backgroundImage: 'url(/Right-Image.png)' }}
           >
           </div>
