@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Image from "next/image";
 import Features from "../../components/Features";
 import SignUpSection from "../../components/Signup";
+import styles from "./ProductDetails.module.css"; // Importing CSS Module if required
 
 const ProductDetails = () => {
   return (
@@ -65,7 +66,7 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      {/* New Ceramics Section */}
+      {/* might like section */}
       <div className="max-w-[1440px] mx-auto px-4">
         {/* Title */}
         <div className="text-[#2A254B] font-clash font-normal text-2xl lg:text-4xl mt-8">
@@ -96,7 +97,7 @@ const ProductDetails = () => {
               className="flex flex-col items-start bg-white p-4 rounded-lg shadow-lg"
             >
               {/* Photo */}
-              <div className="relative w-full h-[375px]">
+              <div className="relative w-full h-[450px]">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -126,7 +127,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <section>
-      <Features />
+        <Features />
       </section>
       <section>
         <SignUpSection />
@@ -136,3 +137,4 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
