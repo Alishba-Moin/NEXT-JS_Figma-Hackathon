@@ -4,7 +4,8 @@ import Features from '../../components/Features';
 import SignUpSection from '../../components/Signup';
 import Navbar from './Navbar';
 import Link from 'next/link';
-import Image from 'next/image'
+import Image from 'next/image';
+
 export default function About() {
   return (
     <div className="bg-white">
