@@ -32,8 +32,8 @@ const HeroSection = () => {
           <div className="w-full lg:w-[40%] h-auto md:h-[580px] flex justify-center items-end">
             <Image
               src={'/Right-Image.png'}
-              width={300}
-              height={400}
+              width={500}
+              height={500}
               alt="rightimage"
               className="object-cover"
             />
