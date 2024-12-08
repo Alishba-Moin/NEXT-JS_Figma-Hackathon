@@ -1,36 +1,44 @@
-export default function HeroSection() {
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import React from 'react';
+
+const HeroSection = () => {
   return (
-    <div className="relative w-full max-w-screen-xl mx-auto h-[704px] bg-white">
-      {/* Container */}
-      <div className="flex flex-col lg:flex-row justify-between items-center w-full h-full bg-[#2A254B] p-8">
-        {/* Left Content */}
-        <div className="max-w-[500px] flex flex-col justify-between h-full space-y-8">
-          {/* Heading */}
-          <h2 className="text-[32px] font-normal leading-[140%] text-white font-clash-display sm:text-[28px] md:text-[32px]">
-            The furniture brand for the future, with timeless designs
-          </h2>
+    <section className="bg-white">
+      <div className="relative w-full max-w-screen-xl mx-auto h-auto md:h-[800px] px-8 py-12">
+        {/* Container */}
+        <div className="flex flex-col-reverse lg:flex-row justify-between items-center w-full h-full bg-[#2A254B]">
+          {/* Left Content */}
+          <div className="w-full lg:w-[55%] h-auto md:h-[700px] px-4 md:px-12 py-6 md:py-12 text-white flex flex-col justify-between">
+            {/* Heading */}
+            <h2 className="text-[32px] md:text-[40px] font-normal leading-[140%] text-white">
+              The furniture brand for the future, with timeless designs
+            </h2>
 
-          {/* Paragraph */}
-          <p className="text-[18px] font-normal leading-[150%] text-white font-satoshi sm:text-[16px] md:text-[18px]">
-            A new era in eco-friendly furniture with Avelon, the French luxury retail brand with nice fonts,
-            tasteful colors, and a beautiful way to display things digitally using modern web technologies.
-          </p>
+            <Button className="w-[180px] h-[60px] bg-transparent text-white border border-gray-600 font-bold mt-8">
+              View collection
+            </Button>
 
-          {/* Button */}
-          <div>
-            <button className="px-8 py-4 text-white bg-opacity-15 bg-white font-satoshi text-[16px] leading-[150%] sm:text-[14px] md:text-[16px]">
-             View Collection
-            </button>
+            <div className="flex justify-center md:justify-start">
+              <p className="mt-6 text-sm md:text-base">
+                A new era in eco-friendly furniture with Avion, the French luxury retail brand
+                <br /> with sleek fonts, full colors, and a beautiful way to display things digitally
+                <br /> using modern web technologies.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Image */}
+          <div
+            className="absolute top-0 left-[760px] w-[600px] h-[700px] bg-cover bg-center"
+            style={{ backgroundImage: 'url(/Right-Image.png)' }}
+          >
           </div>
         </div>
-
-        {/* Right Image */}
-        <div
-          className="w-full lg:w-[520px] h-full bg-cover bg-center lg:h-[800px] sm:h-[400px] md:h-[600px]"
-          style={{ backgroundImage: "url('/Right-Image.png')" }}
-        ></div>
       </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default HeroSection;
 
