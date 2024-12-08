@@ -40,11 +40,13 @@ export default function Home() {
             <ProductCard key={index} title={product.title} price={product.price} imageUrl={product.imageUrl} />
           ))}
         </div>
-        <div className="flex justify-center mt-12">
+       <div className="flex justify-center mt-12">
+      <Link href="/ProductListing">
         <button className="px-8 py-3 bg-gray-200 text-[#2A254B] font-satoshi text-lg rounded-lg">
-          View collection
+          View product details
         </button>
-      </div>
+      </Link>
+    </div>
         </div>
       </>
   );
