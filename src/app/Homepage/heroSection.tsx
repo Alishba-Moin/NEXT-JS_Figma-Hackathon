@@ -28,16 +28,9 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Content (Image) */}
-          <div className="w-full lg:w-[40%] h-auto md:h-[580px] flex justify-center items-end">
-            <Image
-              src={'/Right-Image.png'}
-              width={500}
-              height={400}
-              alt="rightimage"
-              className="object-cover"
-            />
-          </div>
+         <!-- Right Image -->
+  <div class="absolute top-0 left-[760px] w-[520px] h-[584px] bg-cover" style="background-image: url('/Right-Image.png');"></div>
+</div>
         </div>
       </div>
     </section>
