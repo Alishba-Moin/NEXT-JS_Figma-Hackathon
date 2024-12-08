@@ -25,17 +25,17 @@ export default function Navbar() {
       {/* Side Actions (Icons for Search, Cart, Avatar) - Desktop View */}
       <div className="hidden lg:flex absolute top-[30px] right-10 gap-[16px]">
         {/* Search Icon */}
-        <div className="w-[16px] h-[16px] bg-[#2A254B] flex items-center justify-center rounded-full">
+        <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full">
           <IoSearch size={16} color="#2A254B" />
         </div>
 
         {/* Shopping Cart Icon */}
-        <div className="w-[16px] h-[16px] bg-[#2A254B] flex items-center justify-center rounded-full">
+        <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full">
           <MdOutlineShoppingCart size={16} color="#2A254B" />
         </div>
 
         {/* User Avatar Icon */}
-        <div className="w-[16px] h-[16px] bg-[#2A254B] flex items-center justify-center rounded-full">
+        <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full">
           <CgProfile size={16} color="#2A254B" />
         </div>
       </div>
