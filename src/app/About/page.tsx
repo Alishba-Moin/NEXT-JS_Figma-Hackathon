@@ -13,15 +13,15 @@ export default function About() {
       {/* Page Header */}
       <header className="relative w-full h-[350px] bg-white px-4 sm:px-6 md:px-12 flex justify-between items-center">
         {/* Brand Description - Left side */}
-        <div className="text-[#2A254B] font-normal text-[36px] leading-[50px] max-w-[704px] sm:text-[24px] sm:leading-[36px] sm:max-w-[90%] sm:text-center sm:mb-4 sm:px-4">
+        <h1 className="text-[#2A254B] font-normal text-[36px] leading-[50px] max-w-[704px] sm:text-[24px] sm:leading-[36px] sm:max-w-[90%] sm:text-center sm:mb-4 sm:px-4">
           A brand built on the love of craftsmanship,
           <br />
           quality and outstanding customer service
-        </div>
+        </h1>
 
         {/* Button - Right side */}
         <Link href="/AllProducts" passHref>
-          <Button className="text-gray-950 px-[32px] py-[16px] rounded-md text-[16px] leading-[24px] sm:px-[24px] sm:py-[12px] sm:w-full">
+          <Button className="text-gray-950 text-[16px] leading-[24px] sm:px-[24px] sm:py-[12px] sm:w-full">
             View Our Products
           </Button>
         </Link>
