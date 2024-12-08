@@ -12,7 +12,7 @@ export default function HeroSection() {
 
           {/* Button */}
           <button className="px-8 py-4 text-white bg-opacity-15 bg-white font-satoshi text-[16px] leading-[150%] sm:text-[14px] md:text-[16px]">
-            Explore Now
+            New collection
           </button>
 
           {/* Paragraph */}
@@ -23,7 +23,7 @@ export default function HeroSection() {
         </div>
 
         {/* Right Image */}
-        <div className="w-[520px] h-full bg-cover bg-center lg:w-[520px] sm:w-full" style={{ backgroundImage: "url('/Right-Image.png')" }}></div>
+        <div className="w-[520px] h-full bg-cover bg-center lg:w-[520px] sm:w-full hidden md:block" style={{ backgroundImage: "url('/Right-Image.png')" }}></div>
       </div>
     </div>
   );
