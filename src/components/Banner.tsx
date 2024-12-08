@@ -6,7 +6,7 @@ export default function Banner() {
       {/* Banner Content */}
       <div className="absolute flex items-center gap-2 w-full max-w-[407px] px-4 sm:w-auto sm:px-0 left-1/2 transform -translate-x-1/2 top-3">
         {/* Delivery Icon */}
-        <FaTruck size={30} color="white" className="inline-block" /> {/* Adjusted to be inline with text */}
+        <FaTruck  /> {/* Adjusted to be inline with text */}
         
         {/* Delivery Text */}
         <p className="text-white text-xs sm:text-sm md:text-base">
