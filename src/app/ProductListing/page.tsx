@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Navbar from "./Navbar";
 import Image from "next/image";
-import Features from "../../components/Featured";
+import Features from "../../components/Features";
 import SignUpSection from "../../components/Signup";
 
 const ProductDetails = () => {
