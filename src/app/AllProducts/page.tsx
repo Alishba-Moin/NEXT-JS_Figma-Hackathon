@@ -40,9 +40,11 @@ export default function Home() {
             <ProductCard key={index} title={product.title} price={product.price} imageUrl={product.imageUrl} />
           ))}
         </div>
-        <Button className="flex items-center px-4 py-2 gap-2 text-sm text-gray-800">
-      <span>Load more</span>
-      </Button>
+        <div className="flex justify-center mt-12">
+        <button className="px-8 py-3 bg-gray-200 text-[#2A254B] font-satoshi text-lg rounded-lg">
+          View collection
+        </button>
+      </div>
         </div>
       </>
   );
