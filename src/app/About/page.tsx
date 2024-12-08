@@ -33,13 +33,13 @@ export default function About() {
           <p className="mt-6">
             A global brand with local beginnings, our story began in a small studio in South London in early 2014.
           </p>
-          <button className="bg-input-bg h-12 w-40 rounded-sm mt-10 text-white">
+          <Button className="bg-input-bg h-12 w-40 rounded-sm mt-10 text-white">
             View Collection
-          </button>
+          </Button>
         </div>
         <div className="w-full md:w-2/5">
-          <img
-            src="/images/About main.png"
+          <Image
+            src="/Image-Block.png"
             alt="About main"
             className="w-full transition-transform duration-300 ease-in-out hover:scale-105 hover:translate-y-1"
           />
@@ -49,7 +49,7 @@ export default function About() {
       {/* Service section */}
       <div className="flex flex-col md:flex-row w-full h-auto items-center px-4 py-16 space-y-8 md:space-y-0">
         <Image
-          src=""
+          src="/features2.png"
           alt="Service"
           className="w-full md:w-2/5 transition-transform duration-300 ease-in-out hover:scale-105 hover:translate-y-1"
         />
@@ -62,7 +62,7 @@ export default function About() {
             mass market. Handmade, and lovingly crafted furniture and homeware is what we live, breathe, and design so
             our Chelsea boutique became the hotbed for the London interior design community.
           </p>
-          <button className="bg-white h-12 w-40 rounded-sm mt-10 text-custom-purple">Get in Touch</button>
+          <Button className="bg-white h-12 w-40 rounded-sm mt-10 text-custom-purple">Get in Touch</Button>
         </div>
       </div>
 
