@@ -4,6 +4,7 @@ import { Category } from '../../../hackathon-template02/schema/category'
 import Customer from './customer'
 import Order from './order'
 import Shipment from './shipment'
+import user from './user'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -12,6 +13,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     Category,
     Customer,
     Order,
-    Shipment
+    Shipment,
+    user
   ],
 }

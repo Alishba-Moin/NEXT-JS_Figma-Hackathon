@@ -3,7 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/Footer/page";
 import { CartProvider } from "../../context/Cart_Context";
-import { Toaster } from "react-hot-toast"; // Import Toaster component
+import { Toaster } from "react-hot-toast";
+import SessionProvider from "../../utils/SessionProvider";
+import Providers from "../../Providers";
+import { getServerSession } from "next-auth";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,21 +24,26 @@ export const metadata: Metadata = {
   description: "Furniture Website",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+         <SessionProvider session={session}>
         <CartProvider>
           <Toaster /> 
+          <Providers>
           {children}
+          </Providers>
           <Footer />
         </CartProvider>
+        </SessionProvider>
       </body>
     </html>
   );

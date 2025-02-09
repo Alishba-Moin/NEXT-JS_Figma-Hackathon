@@ -68,7 +68,7 @@ const Header = () => {
           </Link>
 
           {/* Profile Icon */}
-          <Link href="/About">
+          <Link href="/profile">
             <CgProfile size={24}/>
           </Link>
         </div>
