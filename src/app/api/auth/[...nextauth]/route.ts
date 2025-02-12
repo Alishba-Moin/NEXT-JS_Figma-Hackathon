@@ -1,66 +1,14 @@
-// import NextAuth, { AuthOptions, User } from 'next-auth';
-// import GoogleProvider from 'next-auth/providers/google';
-// import CredentialsProvider from 'next-auth/providers/credentials';
-// import { JWT } from 'next-auth/jwt'; // Correct way to import JWT as a type
-
-// export const authOptions: AuthOptions = {
-//   providers: [
-//     GoogleProvider({
-//       clientId: process.env.GOOGLE_CLIENT_ID as string,
-//       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-//     }),
-//     CredentialsProvider({
-//       name: 'Credentials',
-//       credentials: {
-//         email: { label: 'Email', type: 'email' },
-//         password: { label: 'Password', type: 'password' },
-//       },
-//       async authorize(credentials) {
-//         if (credentials?.email && credentials?.password) {
-//           const user: User = {
-//             id: '1',
-//             name: 'User',
-//             email: credentials.email,
-//           };
-//           return user;
-//         }
-//         return null;
-//       },
-//     }),
-//   ],
-//   pages: {
-//     signIn: '/auth',
-//   },
-//   session: {
-//     strategy: 'jwt',
-//   },
-//   callbacks: {
-//     async jwt({ token, user }: { token: JWT; user?: User }) {
-//       if (user) {
-//         token.email = user.email;
-//       }
-//       return token;
-//     },
-//     async session({ session, token }: { session: any; token: JWT }) {
-//       session.user.email = token.email as string;
-//       return session;
-//     },
-//   },
-//   secret: process.env.NEXTAUTH_SECRET,
-// };
-
-// const handler = NextAuth(authOptions);
-// export { handler as GET, handler as POST };
-
 import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import { Account, User as AuthUser } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { client } from "@/sanity/lib/client"; 
+import { client } from "@/sanity/lib/client";
 
-export const authOptions = {
+// Define auth options correctly
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -137,5 +85,8 @@ export const authOptions = {
   },
 };
 
-export const handler = NextAuth(authOptions);
+// ✅ Correctly export handlers for Next.js 14
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+
+
