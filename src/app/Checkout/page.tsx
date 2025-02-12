@@ -1,33 +1,64 @@
-"use client"
+"use client";
 
-import { useState } from "react"; 
-import { useCart } from "../../../context/Cart_Context"; 
+import { useState, useEffect } from "react";
+import { useCart } from "../../../context/Cart_Context";
 import React from "react";
-import AnimatedModal from "@/components/OrderConfirmation"; 
+import AnimatedModal from "@/components/OrderConfirmation";
 import Header from "@/components/Header/page";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
+const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+
+if (!stripeKey) {
+  console.error("Stripe Publishable Key is missing.");
+}
+
+const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
 
 
+// Checkout Form Component
+const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [message, setMessage] = useState("");
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
 
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: { return_url: `http://localhost:3000/payment-success`},
+    });
+
+    if (error) {
+      setMessage(error.message || "Payment failed.");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <PaymentElement />
+      <button type="submit" disabled={!stripe} className="w-full bg-blue-600 text-white py-2 rounded-md">
+        Pay Now
+      </button>
+      {message && <p className="text-red-500 text-sm">{message}</p>}
+    </form>
+  );
+};
+
+// Main PaymentForm Component
 const PaymentForm = () => {
-  const { state: { items }, dispatch } = useCart();
- console.log(items)
-
+  const { state: { items } } = useCart();
+  const [clientSecret, setClientSecret] = useState("");
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => setIsModalOpen(false);
 
-
   const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const [paymentDetails, setPaymentDetails] = useState({
-    nameOnCard: '',
-    cardNumber: '',
-    expirationDate: '',
-    cvv: '',
-  });
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [paymentStatus, setPaymentStatus] = useState(''); // New state for payment status
   // Billing information state
   const [customer, setCustomer] = useState({
     name: "",
@@ -42,46 +73,41 @@ const PaymentForm = () => {
     paymentMethod: "",
   });
 
-  // Sample city options
-  const cities = ["Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta", "Multan", "Faisalabad", "Rawalpindi", "Hyderabad", "Sialkot"];
+   // Sample city options
+   const cities = ["Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta", "Multan", "Faisalabad", "Rawalpindi", "Hyderabad", "Sialkot"];
 
-  // Handle input changes for billing info
-  const handleBillingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setCustomer({ ...customer, [e.target.name]: e.target.value });
-  };
+   // Handle input changes for billing info
+   const handleBillingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+     setCustomer({ ...customer, [e.target.name]: e.target.value });
+   };
+  // Fetch clientSecret from backend
 
-  // Handle payment method change
-  const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setPaymentMethod(e.target.value); // Update selected payment method
-  };
-
+  useEffect(() => {
+    const fetchClientSecret = async () => {
+      try {
+        const response = await fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: total }), // Ensure valid JSON body
+        });
   
-  // Handle input changes for payment form
-  const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setPaymentDetails({ ...paymentDetails, [name]: value });
-  };
-
-  // Mock function to simulate a payment
-  const processPayment = (paymentMethod: string) => {
-    if (paymentMethod === 'creditCard') {
-      // Simulate Credit Card Payment Process
-      setTimeout(() => {
-        setPaymentStatus('Payment successful! Your order is confirmed.');
-      }, 2000); // Mock success after 2 seconds
-    } else if (paymentMethod === 'paypal') {
-      // Simulate PayPal Payment Process
-      setTimeout(() => {
-        setPaymentStatus('Payment successful via PayPal! Your order is confirmed.');
-      }, 2000); // Mock success after 2 seconds
-    }
-  };
-   // Handle form submit
-   const handlePaymentSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setPaymentStatus('Processing payment...'); // Show processing message
-    processPayment(paymentMethod); // Call the mock payment function
-  };
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        if (!data.clientSecret) throw new Error("Invalid response from server");
+        
+        setClientSecret(data.clientSecret);
+      } catch (error) {
+        console.error("Error fetching payment intent:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchClientSecret();
+  }, [total]);
   
   type FormDataKeys = keyof typeof customer;
  // Handle place order
@@ -154,16 +180,16 @@ const PaymentForm = () => {
   }
 };
 
-
   return (
     <div>
       <header>
-        <Header/>
+        <Header />
       </header>
       <div className="flex flex-col lg:flex-row gap-8 p-4">
-      {/* Left Side - Billing Details */}
-      <div className="flex-1 bg-white p-6 rounded-md shadow-md">
-      <h1 className="text-3xl font-extrabold text-[#2A254B] mb-6">Billing Information</h1>
+        {/* Left Side - Billing Details */}
+        <div className="flex-1 bg-white p-6 rounded-md shadow-md">
+          <h1 className="text-3xl font-extrabold text-[#2A254B] mb-6">Billing Information</h1>
+          {/* Billing form here */}
           <form className="space-y-4">
             <div>
               <label htmlFor="Name" className="block text-sm font-medium text-gray-700">Name</label>
@@ -273,25 +299,17 @@ const PaymentForm = () => {
         </div>
 
         {/* Right Side - Order Summary */}
-  <div className="w-full md:w-[45%]  p-6 rounded-xl pl-0 ml-0 sm:p-6 bg-[#e9e5ff]">
-    <div className='flex justify-between items-center pb-4'>
-    <h1 className="text-2xl font-extrabold text-[#2A254B] mb-6">Product</h1>
-    <h2 className="text-2xl font-extrabold text-[#2A254B] mb-6">Subtotal</h2>
-    </div>
-
-
-    {/* Product List */}
-    <div className="space-y-4">
-      {items.map((item, index) => (
-        <div key={index} className="flex justify-between items-center py-2 border-b">
-                <p className="text-sm font-medium text-gray-700">
-                  {item.name} x {item.quantity}
-                </p>
-                <p className="text-sm font-semibold text-gray-700">&#163; {item.price * item.quantity}</p>
-              </div>
+        <div className="w-full md:w-[45%] p-6 rounded-xl bg-[#e9e5ff]">
+          <h1 className="text-2xl font-extrabold text-[#2A254B] mb-6">Order Summary</h1>
+          {items.map((item, index) => (
+            <div key={index} className="flex justify-between py-2 border-b">
+              <p className="text-sm font-medium text-gray-700">
+                {item.name} x {item.quantity}
+              </p>
+              <p className="text-sm font-semibold text-gray-700">&#163; {item.price * item.quantity}</p>
+            </div>
           ))}
-    </div>
-    <div className="space-y-4 mt-4">
+          <div className="mt-4">
             <div className="flex justify-between">
               <p className="text-sm text-gray-600">Subtotal</p>
               <p className="font-semibold text-gray-700">&#163; {total}</p>
@@ -302,115 +320,19 @@ const PaymentForm = () => {
             </div>
           </div>
 
-        {/* Right side: Payment method selection */}
-        <div className="mt-6 items-center justify-center">
-          <h2 className="text-3xl font-extrabold mb-4 text-[#2A254B] text-center">Choose Your Payment Method</h2>
-          <select
-            value={paymentMethod}
-            onChange={handlePaymentMethodChange}
-            className="border p-2 w-full mb-6"
-          >
-            <option value="">Select Payment Method</option>
-            <option value="creditCard">Credit Card</option>
-            <option value="paypal">PayPal</option>
-          </select>
-
-          {/* Payment form rendering based on the selected payment method */}
-          {paymentMethod === 'creditCard' && (
-            <form onSubmit={handlePaymentSubmit} className="space-y-4">
-              <div className="mb-4">
-                <label className="block text-gray-700">Name on Card</label>
-                <input
-                  type="text"
-                  name="nameOnCard"
-                  value={paymentDetails.nameOnCard}
-                  onChange={handlePaymentChange}
-                  className="border p-2 w-full"
-                  placeholder="John Doe"
-                />
-              </div>
-               {/* Expiration Date and CVV */}
-               <div className="flex gap-4 mt-4">
-                {/* Expiration Date */}
-                <div className="flex-1">
-                  <label className="block font-medium">Expiration Date</label>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      placeholder="MM"
-                      className="w-1/2 border rounded-md p-2"
-                    />
-                    <input
-                      type="text"
-                      placeholder="YY"
-                      className="w-1/2 border rounded-md p-2"
-                    />
-                  </div>
-                </div>
-
-                {/* CVV */}
-                <div className="flex-1">
-                  <label className=" font-medium flex items-center">
-                    CVV
-                    <span className="ml-2 text-gray-500 cursor-pointer">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2}
-                        stroke="currentColor"
-                        className="w-4 h-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 6v6m0 6h.01m-6.938 4h13.856C19.919 21.998 21 20.945 21 19.616V6.384C21 5.055 19.919 4.002 18.618 4H5.382C4.081 4 3 5.055 3 6.384v13.232C3 20.945 4.081 21.998 5.382 21.998z"
-                        />
-                      </svg>
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="123"
-                    className="w-full border rounded-md p-2 mt-2"
-                  />
-                </div>
-              </div>
-              <button type="submit" className="w-full bg-green-500 text-white p-2 rounded-md">
-                Submit Payment
-              </button>
-            </form>
-          )}
-
-          {paymentMethod === 'paypal' && (
-            <div className="flex flex-col items-center">
-              <h3 className="text-xl mb-4">PayPal Payment</h3>
-              <p className="text-gray-600">You will be redirected to PayPal for payment.</p>
-              <button
-                className="w-full bg-yellow-500 text-white p-2 rounded-md mt-4"
-                onClick={() => {
-                  setPaymentStatus('Redirecting to PayPal...');
-                  setTimeout(() => {
-                    setPaymentStatus('Payment successful via PayPal! Your order is confirmed.');
-                  }, 2000); // Simulate PayPal redirect and payment success
-                }}
-              >
-                Proceed to PayPal
-              </button>
-            </div>
-          )}
+          {/* Payment Section */}
+          {loading ? (
+          <p className="text-center text-gray-600">Loading payment details...</p>
+        ) : clientSecret && stripePromise ? (
+        <Elements options={{ clientSecret }} stripe={stripePromise}>
+          <CheckoutForm clientSecret={clientSecret} />
+        </Elements>
+    ) : (
+        <p className="text-center text-red-500">Failed to load payment details.</p>
+        )}
         </div>
       </div>
-
-      {/* Show Payment Status */}
-      {paymentStatus && (
-        <div className="mt-6 p-4 border rounded-md bg-green-100 text-green-800">
-          <p>{paymentStatus}</p>
-        </div>
-      )}
-    </div>
-
-    <div className="mt-6">
+      <div className="mt-6">
     <button
         className=" py-3 bg-[#2A254B] border border-[#c1bcde] text-white font-semibold rounded-md transition"
         onClick={handlePlaceOrderAndCustomer}
@@ -428,9 +350,3 @@ const PaymentForm = () => {
 };
 
 export default PaymentForm;
-
-
-
-
-
-
