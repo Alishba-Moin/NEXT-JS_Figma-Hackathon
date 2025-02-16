@@ -27,9 +27,12 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
     e.preventDefault();
     if (!stripe || !elements) return;
 
+    // Dynamically set return_url based on environment
+    const returnUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success`;
+
     const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: { return_url: `http://localhost:3000/payment-success`},
+        elements,
+        confirmParams: { return_url: returnUrl },
     });
 
     if (error) {
